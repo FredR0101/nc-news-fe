@@ -1,0 +1,9 @@
+.article-card {
+    list-style: none;
+    text-align: center;
+    background-color: lightblue;
+    padding: 20px;
+    margin: 50px auto; 
+    width: min-content;
+    display: block; 
+}
