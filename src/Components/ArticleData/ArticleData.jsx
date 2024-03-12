@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchArticleById } from '../../App';
 import "./ArticleData.css"
+import ArticleComments from '../ArticleComments/ArticleComments';
 
 const ArticleData = () => {
     const [article, setArticle] = useState({})
@@ -28,6 +29,10 @@ const ArticleData = () => {
             <p>Comment count: {article.comment_count}</p>
             <br />
             <p>{article.body}</p>
+            <br />
+            <br />
+            <p>Comments:</p>
+            <ArticleComments/>
         </div>
     )
 }
