@@ -8,6 +8,15 @@
 #title-container {
     background-color: lightblue;
     height: 100px;
-    padding-top: -50px;
     border-radius: 25px;
+}
+
+.home-button {
+    background-color: lightblue;
+    border-color: black;
+    border-radius: 5px;
+    font-size: 30px;
+    position: left, fixed;
+    transform: translateY(-30px) translateX(15px);
+
 }

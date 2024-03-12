@@ -5,5 +5,44 @@
     padding: 20px;
     margin: 50px auto; 
     width: min-content;
+    height:650px ;
     display: block; 
+    border-radius: 25px;
+    margin-right: 50px;
+    @media (max-width: 768px) {
+        width: 70%;
+    }
 }
+
+.article-list ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.article-card img {
+    border-radius: 25px;
+    @media (max-width: 768px) {
+        width: 70%;
+    }
+}
+
+.article-card p {
+    font-size: 20px;
+}
+
+.loader {
+    margin: auto;
+    border: 20px solid #EAF0F6;
+    border-radius: 50%;
+    border-top: 20px solid lightblue;
+    width: 200px;
+    height: 200px;
+    animation: spinner 4s linear infinite;
+    transform: translateY(150px);
+  }
+  @keyframes spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

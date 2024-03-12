@@ -1,0 +1,23 @@
+.single-article {
+    text-align: center;
+    background-color: lightblue;
+    border-radius: 25px;
+    padding: 30px;
+    margin: 50px auto; 
+    width: min-content; 
+    @media (max-width: 768px) {
+        width: 70%;
+    }
+}
+
+.articleDataImage {
+    border-radius: 15px;
+    @media (max-width: 768px) {
+        width: 70%;
+    }
+
+}
+
+.articleTitle {
+    font-size: 25px;
+}
