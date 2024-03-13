@@ -22,20 +22,28 @@ export const fetchCommentsById = (article_id) => {
   })
 }
 
-export const incPatchVotesByArticleId = (article_id) => {
+export const PatchVotesByArticleId = (article_id, voteChange) => {
   const patchBody = {
-    inc_votes: 1
+    inc_votes: voteChange
   }
   return ncNewsApi.patch(`/articles/${article_id}`, patchBody).then(({data}) => {
     return data.article
   })
 }
 
-export const decPatchVotesByArticleId = (article_id) => {
-  const patchBody = {
-    inc_votes: -1
+
+export const getUsers = () => {
+  return ncNewsApi.get("/users").then((response) => {
+    return response.data.users
+  })
+}
+
+export const postComment = (article_id, user, comment) => {
+  const postData = {
+    author: user.username,
+    body: comment
   }
-  return ncNewsApi.patch(`/articles/${article_id}`, patchBody).then(({data}) => {
-    return data.article
+  return ncNewsApi.post(`/articles/${article_id}/comments`, postData).then(({data}) => {
+    return data.comments
   })
 }

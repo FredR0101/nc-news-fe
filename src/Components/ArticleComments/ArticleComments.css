@@ -13,3 +13,11 @@ li {
 .comment-list {
     padding-right: 30px;
 }
+
+.error-message {
+    color: red;
+}
+
+.success-message {
+    color: green;
+}
