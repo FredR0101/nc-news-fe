@@ -21,3 +21,8 @@
 .articleTitle {
     font-size: 25px;
 }
+
+
+.error-message {
+    color: red;
+}

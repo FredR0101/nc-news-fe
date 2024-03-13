@@ -1,8 +1,9 @@
 #title {
     text-align: center;
+    position: relative;
     margin-top: 50px;
-    transform: translateY(30px);
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+    transform: translateY(30px) translateX(45px);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 #title-container {
@@ -11,12 +12,41 @@
     border-radius: 25px;
 }
 
+.header-profile-picture{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    transform: translateX(70px) translateY(-35px);
+}
+
+.header-login-message {
+    position: absolute;
+    transform: translateY(-80px) translateX(320px);
+
+}
+
 .home-button {
     background-color: lightblue;
     border-color: black;
     border-radius: 5px;
     font-size: 30px;
-    position: left, fixed;
+    position: absolute;
     transform: translateY(-30px) translateX(15px);
+    @media (max-width: 768px) {
+        width: 10%;
+    }
+
+}
+
+.users-button {
+    background-color: lightblue;
+    border-color: black;
+    border-radius: 5px;
+    font-size: 30px;
+    position: relative;
+    transform: translateY(-30px) translateX(20px);
+    @media (max-width: 768px) {
+        width: 10%;
+    }
 
 }
