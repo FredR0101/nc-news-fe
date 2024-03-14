@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchArticleById, PatchVotesByArticleId } from "../../App";
 import "./ArticleData.css";
+import moment from "moment";
 import ArticleComments from "../ArticleComments/ArticleComments";
 import Button from "@mui/material/Button";
 
@@ -13,6 +14,7 @@ const ArticleData = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [errorMessage, setErrorMessage] = useState("")
   const [votes, setVotes] = useState(0)
+  const date = moment(article.created_at).format("YYYY-MM-DD HH:mm:ss")
 
   const SendVotes = (article_id, isIncrement) => {
     if (isFetching || isButtonDisabled) return;
@@ -62,7 +64,7 @@ const ArticleData = () => {
       />
       <p>Category: {article.topic}</p>
       <p>Written by: {article.author}</p>
-      <p>Created at: {article.created_at}</p>
+      <p>Created at: {date}</p>
       <p>Votes: {votes}</p>
       <Button
         variant="contained"

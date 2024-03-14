@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { fetchCommentsById, postComment } from "../../App";
+import { deleteComment, fetchCommentsById, postComment } from "../../App";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import ArticleComment from "./CommentCard";
@@ -18,21 +18,43 @@ const ArticleComments = () => {
 
   const handleSubmit = (event) => {
     const optimisticComment = {
-      username: loggedInUser,
-      body: newComment
+      author: loggedInUser.username,
+      body: newComment,
+      created_at: "0 seconds ago",
+      votes: 0
     }
     setComments([optimisticComment, ...comments])
     event.preventDefault()
     postComment(article_id, loggedInUser, newComment).then(() => {
         setNewComment("")
         setErrorMessage("")
-        setSuccessMessage("Comment successful!")
+        setSuccessMessage("Comment posted!")
     }).catch((error) => {
       console.error("Comment patching failed:", error);
       setErrorMessage("Comment operation failed. Please try again.");
       setSuccessMessage("")
       
     })
+  }
+
+  const handleDelete = (comment_id, username) => {
+    if(loggedInUser.username === username) {
+      const updatedComments = comments.filter((comment) => comment.comment_id !== comment_id)
+      setComments(updatedComments)
+      deleteComment(comment_id).then(() => {
+        setSuccessMessage("Comment deleted!")
+        setErrorMessage("")
+      }).catch((error) => {
+        console.error("Delete failed:", error);
+        setComments(comments)
+        setErrorMessage("Unable to perform delete action!")
+        setSuccessMessage("")
+      })
+    } else {
+      setErrorMessage("Unable to delete a comment that is not your own")
+      setSuccessMessage("")
+    }
+
   }
 
   useEffect(() => {
@@ -77,7 +99,7 @@ const ArticleComments = () => {
       <div className="comment-list">
         <ul>
           {comments.map((comment, index) => (
-            <ArticleComment key={index} comment={comment} />
+            <ArticleComment key={index} comment={comment} onDelete={() => handleDelete(comment.comment_id, comment.author)} />
           ))}
         </ul>
       </div>
