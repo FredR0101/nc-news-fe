@@ -7,6 +7,9 @@ const ArticleCard = (props) => {
             <img src={article.article_img_url} alt="article image" />
             <p>{article.topic}</p>
             <p>{article.author}</p>
+            <p>Votes: {article.votes}</p>
+            <p>Comment Count: {article.comment_count}</p>
+            <p>Created at: {article.created_at}</p>
         </li>
     )
 }

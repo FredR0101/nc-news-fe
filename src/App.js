@@ -4,8 +4,13 @@ const ncNewsApi = axios.create({
   baseURL: "https://nc-news-lhwd.onrender.com/api",
 });
 
-export const getArticles = () => {
-  return ncNewsApi.get("/articles").then((response) => {
+export const getArticles = (searchTerm1, searchTerm2, searchTerm3) => {
+  const params = {};
+  if (searchTerm1) params.topic = searchTerm1;
+  if (searchTerm2) params.sort_by = searchTerm2;
+  if (searchTerm3) params.order = searchTerm3;
+
+  return ncNewsApi.get("/articles", { params }).then((response) => {
     return response.data.articles;
   });
 };
