@@ -1,0 +1,6 @@
+
+.errorpage-message {
+    text-align: center;
+    transform: translateY(40px);
+    color: red;
+}
