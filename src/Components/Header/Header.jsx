@@ -9,7 +9,7 @@ import UserContext from "../Contexts/User";
 const Header = () => {
   const {loggedInUser} = useContext(UserContext)
   return (
-    <header>
+    <header className="header">
       <div id="title-container">
         <h1 id="title">NC News</h1>
         <Link to="/" element={<ArticleList/>}>

@@ -1,10 +1,11 @@
 #title {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-30px) ; /* Adjust transformations */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
-    position: relative;
-    margin-top: 50px;
-    transform: translateY(30px) translateX(45px);
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
+}  
 
 #title-container {
     background-color: lightblue;
@@ -16,12 +17,14 @@
     width: 50px;
     height: 50px;
     position: absolute;
-    transform: translateX(70px) translateY(-35px);
+    top: 35px;
+    right: 19%
 }
 
 .header-login-message {
     position: absolute;
-    transform: translateY(-80px) translateX(320px);
+    top: 35px;
+    left: 82%
 
 }
 
@@ -31,8 +34,9 @@
     border-radius: 5px;
     font-size: 30px;
     position: absolute;
-    transform: translateY(-30px) translateX(15px);
-    @media (max-width: 768px) {
+    top: 30px;
+    left: 2%;
+    @media (max-width: 728px) {
         width: 10%;
     }
 
@@ -43,8 +47,9 @@
     border-color: black;
     border-radius: 5px;
     font-size: 30px;
-    position: relative;
-    transform: translateY(-30px) translateX(20px);
+    position: absolute;
+    top: 30px;
+    left: 3%;
     @media (max-width: 768px) {
         width: 10%;
     }
