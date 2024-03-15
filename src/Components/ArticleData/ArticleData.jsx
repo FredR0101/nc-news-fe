@@ -5,6 +5,7 @@ import "./ArticleData.css";
 import moment from "moment";
 import ArticleComments from "../ArticleComments/ArticleComments";
 import Button from "@mui/material/Button";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 const ArticleData = () => {
   const [article, setArticle] = useState({});
@@ -12,9 +13,10 @@ const ArticleData = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("")
-  const [votes, setVotes] = useState(0)
-  const date = moment(article.created_at).format("YYYY-MM-DD HH:mm:ss")
+  const [errorMessage, setErrorMessage] = useState("");
+  const [votes, setVotes] = useState(0);
+  const date = moment(article.created_at).format("YYYY-MM-DD HH:mm:ss");
+  const [newError, setNewError] = useState(null);
 
   const SendVotes = (article_id, isIncrement) => {
     if (isFetching || isButtonDisabled) return;
@@ -30,77 +32,88 @@ const ArticleData = () => {
       return currArticle;
     });
     const voteChange = isIncrement ? 1 : -1;
-    PatchVotesByArticleId(article_id, voteChange).then(() => {
-      setIsFetching(false);
-      setErrorMessage("")
-      setVotes((prevVotes) => prevVotes + (isIncrement ? 1 : -1));     
-    }).catch((error) => {
+    PatchVotesByArticleId(article_id, voteChange)
+      .then(() => {
+        setIsFetching(false);
+        setErrorMessage("");
+        setVotes((prevVotes) => prevVotes + (isIncrement ? 1 : -1));
+      })
+      .catch((error) => {
         console.error("Vote patching failed:", error);
         setErrorMessage("Vote operation failed. Please try again.");
         setArticle((currArticle) => ({
           ...currArticle,
           votes: isIncrement ? currArticle.votes - 1 : currArticle.votes + 1,
         }));
-    })
+      });
   };
 
   useEffect(() => {
     setIsLoading(true);
-    fetchArticleById(article_id).then((articleData) => {
-      setIsLoading(false);
-      setArticle(articleData);
-      setVotes(articleData.votes)
-    });
+    fetchArticleById(article_id)
+      .then((articleData) => {
+        setIsLoading(false);
+        setArticle(articleData);
+        setVotes(articleData.votes);
+      })
+      .catch((err) => {
+        console.log(err);
+        setNewError(err.response);
+      });
   }, [article_id]);
 
-  if (isLoading) return <div className="loader"></div>;
-  return (
-    <div className="single-article">
-      <p className="articleTitle">{article.title}</p>
-      <img
-        src={article.article_img_url}
-        className="articleDataImage"
-        alt="article image"
-      />
-      <p>Category: {article.topic}</p>
-      <p>Written by: {article.author}</p>
-      <p>Created at: {date}</p>
-      <p>Votes: {votes}</p>
-      <Button
-        variant="contained"
-        size="small"
-        style={{ color: "black" }}
-        className="upvote-button"
-        disabled={isButtonDisabled}
-        onClick={() => {
-          SendVotes(article.article_id, true);
-        }}
-      >
-        Upvote!
-      </Button>
-      <Button
-        variant="contained"
-        size="small"
-        style={{ color: "black" }}
-        className="upvote-button"
-        disabled={isButtonDisabled}
-        onClick={() => {
-          SendVotes(article.article_id, false);
-        }}
-      >
-        Downvote!
-      </Button>
-      <p className="error-message">{errorMessage}</p>
-      <p>Comment count: {article.comment_count}</p>
-      <br />
-      <p>{article.body}</p>
-      <br />
-      <br />
-      <br />
-      <p>Comments:</p>
-      <ArticleComments />
-    </div>
-  );
+  if (newError) {
+    return <ErrorPage err={newError.status} message={newError.data.msg} />;
+  } else {
+    if (isLoading) return <div className="loader"></div>;
+    return (
+      <div className="single-article">
+        <p className="articleTitle">{article.title}</p>
+        <img
+          src={article.article_img_url}
+          className="articleDataImage"
+          alt="article image"
+        />
+        <p>Category: {article.topic}</p>
+        <p>Written by: {article.author}</p>
+        <p>Created at: {date}</p>
+        <p>Votes: {votes}</p>
+        <Button
+          variant="contained"
+          size="small"
+          style={{ color: "black" }}
+          className="upvote-button"
+          disabled={isButtonDisabled}
+          onClick={() => {
+            SendVotes(article.article_id, true);
+          }}
+        >
+          Upvote!
+        </Button>
+        <Button
+          variant="contained"
+          size="small"
+          style={{ color: "black" }}
+          className="upvote-button"
+          disabled={isButtonDisabled}
+          onClick={() => {
+            SendVotes(article.article_id, false);
+          }}
+        >
+          Downvote!
+        </Button>
+        <p className="error-message">{errorMessage}</p>
+        <p>Comment count: {article.comment_count}</p>
+        <br />
+        <p>{article.body}</p>
+        <br />
+        <br />
+        <br />
+        <p>Comments:</p>
+        <ArticleComments />
+      </div>
+    );
+  }
 };
 
 export default ArticleData;

@@ -6,6 +6,7 @@ import ArticleList from './Components/ArticleList/ArticleList'
 import ArticleData from './Components/ArticleData/ArticleData'
 import UserList from './Components/Users/UserList'
 import UserContext from './Components/Contexts/User'
+import ErrorPage from './Components/ErrorPage/ErrorPage'
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({
@@ -23,6 +24,8 @@ function App() {
       <Route path="/articles/:article_id" element={<ArticleData/>}/>
       <Route path="/articles/topic/:topic" element={<ArticleList/>}/>
       <Route path="/users" element={<UserList/>}/>
+      <Route path="*" element={<ErrorPage/>}/>
+
       
     </Routes>
     </UserContext.Provider>
