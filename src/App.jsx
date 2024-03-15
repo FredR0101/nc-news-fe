@@ -21,7 +21,9 @@ function App() {
     <Routes>
       <Route path = "/" element={<ArticleList/>}/>
       <Route path="/articles/:article_id" element={<ArticleData/>}/>
+      <Route path="/articles/topic/:topic" element={<ArticleList/>}/>
       <Route path="/users" element={<UserList/>}/>
+      
     </Routes>
     </UserContext.Provider>
   )
