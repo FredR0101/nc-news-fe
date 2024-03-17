@@ -5,6 +5,9 @@ li {
 .comment-card {
     background-color: rgb(157, 157, 248);
     border-radius: 15px;
+    border-style: solid;
+    border-color: black;
+    margin-bottom: 30px;
     @media (max-width: 768px) {
         width: 70%;
     }

@@ -9,6 +9,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import ErrorPage from "../ErrorPage/ErrorPage";
 
+
 const ArticleList = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -17,6 +18,7 @@ const ArticleList = () => {
   const { topic } = useParams();
   const navigate = useNavigate();
   const [newError, setnewError] = useState(null);
+  
 
   useEffect(() => {
     setIsLoading(true);
@@ -58,10 +60,12 @@ const ArticleList = () => {
           sx={{
             m: 1,
             minWidth: 100,
-            transform: "translateX(200px) translateY(30px)",
+            left: "3%",
+            top: "30px",
+            right: "3%"
           }}
         >
-          <InputLabel id="topic-selector">Topic</InputLabel>
+          <InputLabel id="selectors">Topic</InputLabel>
           <Select
             labelId="topic-label"
             id="topic-select"
@@ -79,10 +83,12 @@ const ArticleList = () => {
           sx={{
             m: 1,
             minWidth: 100,
-            transform: "translateX(200px) translateY(30px)",
+            left: "3%",
+            top: "30px",
+            right: "3%"
           }}
         >
-          <InputLabel id="sort_by-selector">Sort By</InputLabel>
+          <InputLabel id="selectors">Sort By</InputLabel>
           <Select
             labelId="sort_by-label"
             id="sort_by-select"
@@ -100,10 +106,12 @@ const ArticleList = () => {
           sx={{
             m: 1,
             minWidth: 100,
-            transform: "translateX(200px) translateY(30px)",
+            left: "3%",
+            top: "30px",
+            right: "3%"
           }}
         >
-          <InputLabel id="order-selector">Order</InputLabel>
+          <InputLabel id="selectors">Order</InputLabel>
           <Select
             labelId="order-label"
             id="order-select"
@@ -120,7 +128,7 @@ const ArticleList = () => {
         <div className="article-list">
           <ul>
             {articles.map((article, index) => (
-              <Link to={`/articles/${article.article_id}`} key={index}>
+              <Link to={`/articles/${article.article_id}`} key={index} className="link-no-underline">
                 <ArticleCard key={index} article={article} />
               </Link>
             ))}

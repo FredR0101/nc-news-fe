@@ -1,6 +1,8 @@
 .single-article {
     text-align: center;
     background-color: lightblue;
+    border-style: solid;
+    border-color: black;
     border-radius: 25px;
     padding: 30px;
     margin: 50px auto; 

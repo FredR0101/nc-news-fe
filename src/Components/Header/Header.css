@@ -11,6 +11,8 @@
     background-color: lightblue;
     height: 100px;
     border-radius: 25px;
+    border-style: solid;
+    border-color: black
 }
 
 .header-profile-picture{
