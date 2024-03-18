@@ -5,6 +5,7 @@ const ArticleCard = (props) => {
     const {article} = props
     const date = moment(article.created_at).format("YYYY-MM-DD HH:mm:ss");
     return (
+        <div className="article-card-container">
         <li className="article-card">
             <h2>{article.title}</h2>
             <img src={article.article_img_url} alt="article image" />
@@ -14,6 +15,7 @@ const ArticleCard = (props) => {
             <p>Comment Count: {article.comment_count}</p>
             <p>Created at: {date}</p>
         </li>
+        </div>
     )
 }
 
